@@ -64,7 +64,7 @@ status: Open to work & collaboration
 <table align="center">
 <tr>
 <td align="center" width="200">
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Globe%20with%20Meridians.png" width="48" /><br/>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Globe%20with%20Meridians.png" width="48" alt="🌐" /><br/>
 <strong>Web Development</strong><br/>
 <sub>Full-stack web apps with modern frameworks</sub>
 </td>
@@ -79,7 +79,7 @@ status: Open to work & collaboration
 <sub>Scalable, secure backend services</sub>
 </td>
 <td align="center" width="200">
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Artist%20Palette.png" width="48" /><br/>
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Artist%20Palette.png" width="48" alt="🎨" /><br/>
 <strong>UI/UX Design</strong><br/>
 <sub>Modern, accessible interfaces</sub>
 </td>
