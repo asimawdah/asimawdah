@@ -1,6 +1,6 @@
+# Asim Awdah
 
-
-## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Light%20Skin%20Tone.png" width="28" /> &nbsp;About Me
+Full Stack Developer focused on Flutter, Python/FastAPI, Flask, DevOps, and practical automation.
 
 ```yaml
 name: Asim Awdah
@@ -8,84 +8,86 @@ location: Sana'a, Yemen
 role: Full Stack Developer
 education: B.Sc. in Information Technology — Al-Saeedah University (2020–2024)
 languages: [English, العربية]
-status: Open to work & collaboration
+status: Open to work, collaboration, and building useful products
 ```
 
-> *A passionate Full Stack Developer with strong expertise in building scalable applications and cross-platform systems. Skilled in backend development, API design, and modern DevOps practices — delivering efficient, maintainable, and production-ready software.*
+I build cross-platform apps, backend APIs, automation tools, and deployment workflows with a focus on clean structure, maintainability, and safe defaults.
 
-<br/>
+## Featured projects
 
-## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Hammer%20and%20Wrench.png" width="28" /> &nbsp;Tech Stack
+| Project | Focus | Status |
+| --- | --- | --- |
+| [MahamKit App](https://github.com/asimawdah/maham-app) | Flutter task management app with offline-first foundations, smart templates, onboarding, and cross-platform goals. | Active product work |
+| [Maham API](https://github.com/asimawdah/maham-api) | Backend API for tasks, collections, validation, sync, and mobile app support. | Active backend work |
+| [MahamKit.app](https://github.com/asimawdah/MahamKit.app) | Product landing site, feature catalog, pricing comparison, and app presentation. | Active website work |
+| [SkillMint](https://github.com/asimawdah/SkillMint) | Project scanner that generates AI instruction bundles, stack summaries, commands, and safe-change guidance. | Developer tooling |
+| [DocSmith](https://github.com/asimawdah/DocSmith) | Documentation generator with reusable document presets and CLI workflows. | Developer tooling |
+| [PromptMint](https://github.com/asimawdah/promptmint) | Prompt/context-pack generator with templates for coding, debugging, planning, writing, and learning. | Developer tooling |
+| [main_cluster](https://github.com/asimawdah/main_cluster) | Kubernetes and infrastructure notes, operational docs, and cluster hardening work. | DevOps learning/workflow |
 
-<div align="center">
+## Current roadmap
 
-### Programming Languages
+### Now
 
-<a href="https://python.org"><img src="https://skillicons.dev/icons?i=python" width="65" title="Python" /></a>&nbsp;
-<a href="https://dart.dev"><img src="https://skillicons.dev/icons?i=dart" width="65" title="Dart" /></a>&nbsp;
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://skillicons.dev/icons?i=js" width="65" title="JavaScript" /></a>&nbsp;
-<a href="https://typescriptlang.org"><img src="https://skillicons.dev/icons?i=ts" width="65" title="TypeScript" /></a>&nbsp;
-<a href="https://php.net"><img src="https://skillicons.dev/icons?i=php" width="65" title="PHP" /></a>&nbsp;
-<a href="https://en.wikipedia.org/wiki/C_(programming_language)"><img src="https://skillicons.dev/icons?i=c" width="65" title="C" /></a>&nbsp;
-<a href="https://www.gnu.org/software/bash/"><img src="https://skillicons.dev/icons?i=bash" width="65" title="Bash" /></a>
+- Ship practical MahamKit improvements across app, API, and landing website.
+- Strengthen developer tools for documentation, prompts, project scanning, and automation.
+- Improve Kubernetes operations notes, health checks, and deployment safety.
 
-### Frameworks & Libraries
+### Next
 
-<a href="https://react.dev"><img src="https://skillicons.dev/icons?i=react" width="65" title="React.js" /></a>&nbsp;
-<a href="https://flutter.dev"><img src="https://skillicons.dev/icons?i=flutter" width="65" title="Flutter" /></a>&nbsp;
-<a href="https://tailwindcss.com"><img src="https://skillicons.dev/icons?i=tailwind" width="65" title="Tailwind CSS" /></a>&nbsp;
-<a href="https://laravel.com"><img src="https://skillicons.dev/icons?i=laravel" width="65" title="Laravel" /></a>&nbsp;
-<a href="https://flask.palletsprojects.com"><img src="https://skillicons.dev/icons?i=flask" width="65" title="Flask" /></a>&nbsp;
-<a href="https://fastapi.tiangolo.com"><img src="https://skillicons.dev/icons?i=fastapi" width="65" title="FastAPI" /></a>&nbsp;
-<a href="https://djangoproject.com"><img src="https://skillicons.dev/icons?i=django" width="65" title="Django" /></a>&nbsp;
-<a href="https://nodejs.org"><img src="https://skillicons.dev/icons?i=nodejs" width="65" title="Node.js" /></a>
+- Add better CI checks and validation scripts to active repositories.
+- Improve examples and onboarding docs for each tool.
+- Connect mobile, backend, and website work into a clearer public product story.
+
+### Later
+
+- Publish polished demos, screenshots, and release notes for key projects.
+- Add production deployment guides and security checklists.
+- Build more reusable templates for Flutter, backend APIs, and DevOps workflows.
+
+## Tech stack
+
+### Languages
+
+Python · Dart · JavaScript · TypeScript · PHP · C · Bash
+
+### Frameworks and libraries
+
+Flutter · FastAPI · Flask · React · Tailwind CSS · Laravel · Node.js · Django
 
 ### Databases
 
-<a href="https://mysql.com"><img src="https://skillicons.dev/icons?i=mysql" width="65" title="MySQL" /></a>&nbsp;
-<a href="https://mongodb.com"><img src="https://skillicons.dev/icons?i=mongodb" width="65" title="MongoDB" /></a>&nbsp;
-<a href="https://sqlite.org"><img src="https://skillicons.dev/icons?i=sqlite" width="65" title="SQLite" /></a>
+MongoDB · SQLite · MySQL · Redis
 
-### Tools & Platforms
+### Tools and platforms
 
-<a href="https://docker.com"><img src="https://skillicons.dev/icons?i=docker" width="65" title="Docker" /></a>&nbsp;
-<a href="https://kubernetes.io"><img src="https://skillicons.dev/icons?i=kubernetes" width="65" title="Kubernetes" /></a>&nbsp;
-<a href="https://nginx.org"><img src="https://skillicons.dev/icons?i=nginx" width="65" title="Nginx" /></a>&nbsp;
-<a href="https://kernel.org"><img src="https://skillicons.dev/icons?i=linux" width="65" title="Linux" /></a>&nbsp;
-<a href="https://figma.com"><img src="https://skillicons.dev/icons?i=figma" width="65" title="Figma" /></a>&nbsp;
-<a href="https://git-scm.com"><img src="https://skillicons.dev/icons?i=git" width="65" title="Git" /></a>
+Docker · Kubernetes · Nginx · Linux · Git · GitHub Actions · Figma
 
-</div>
+## What I build
 
-<br/>
+| Area | What it means |
+| --- | --- |
+| Web development | Full-stack apps, dashboards, websites, and product landing pages. |
+| Mobile apps | Flutter apps designed for Android, iOS, desktop, and offline-first usage. |
+| Backend and APIs | Secure REST APIs, validation layers, authentication flows, and database-backed services. |
+| DevOps | Docker, Kubernetes, deployment workflows, server hardening, and operational docs. |
+| Developer tools | CLI utilities, documentation generators, prompt/context tools, and project scanners. |
 
-## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Briefcase.png" width="28" /> &nbsp;What I Do
+## Repository map
 
-<table align="center">
-<tr>
-<td align="center" width="200">
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Globe%20with%20Meridians.png" width="48" alt="🌐" /><br/>
-<strong>Web Development</strong><br/>
-<sub>Full-stack web apps with modern frameworks</sub>
-</td>
-<td align="center" width="200">
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Mobile%20Phone.png" width="48" /><br/>
-<strong>Mobile Apps</strong><br/>
-<sub>Cross-platform apps with Flutter</sub>
-</td>
-<td align="center" width="200">
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Gear.png" width="48" /><br/>
-<strong>Backend & APIs</strong><br/>
-<sub>Scalable, secure backend services</sub>
-</td>
-<td align="center" width="200">
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Artist%20Palette.png" width="48" alt="🎨" /><br/>
-<strong>UI/UX Design</strong><br/>
-<sub>Modern, accessible interfaces</sub>
-</td>
-</tr>
-</table>
+- Product apps: [maham-app](https://github.com/asimawdah/maham-app), [MahamKit.app](https://github.com/asimawdah/MahamKit.app), [Flowsi](https://github.com/asimawdah/Flowsi)
+- Backend/API: [maham-api](https://github.com/asimawdah/maham-api)
+- Developer tools: [SkillMint](https://github.com/asimawdah/SkillMint), [DocSmith](https://github.com/asimawdah/DocSmith), [promptmint](https://github.com/asimawdah/promptmint), [passgen](https://github.com/asimawdah/passgen), [portforge](https://github.com/asimawdah/portforge), [vaultlet](https://github.com/asimawdah/vaultlet)
+- Infrastructure and learning: [main_cluster](https://github.com/asimawdah/main_cluster), [learn](https://github.com/asimawdah/learn), [FlutterForge](https://github.com/asimawdah/FlutterForge)
 
+## Profile maintenance
 
+This profile README is intentionally short and update-friendly. The roadmap should be refreshed when a project becomes inactive, a demo is published, or a new repository becomes the primary focus.
 
-<br/>
+Validation helper:
+
+```bash
+node scripts/validate-profile-readme.mjs
+```
+
+The script checks that the main sections and key repository links remain present.
