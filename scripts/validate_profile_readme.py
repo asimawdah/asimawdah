@@ -55,12 +55,117 @@ ALLOWED_URL_PREFIXES = (
     "https://nginx.org",
 )
 
+FORBIDDEN_PLACEHOLDERS = (
+    "todo",
+    "tbd",
+    "coming soon",
+    "lorem ipsum",
+    "your project",
+    "example.com",
+)
+
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+TABLE_SEPARATOR_RE = re.compile(r"^\|\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$")
 
 
 def fail(message: str) -> None:
     print(f"README validation failed: {message}", file=sys.stderr)
     raise SystemExit(1)
+
+
+def normalize_cell(value: str) -> str:
+    return value.strip().replace("`", "")
+
+
+def table_cells(row: str) -> list[str]:
+    if not row.startswith("|"):
+        fail(f"malformed markdown table row: {row}")
+    return [normalize_cell(cell) for cell in row.strip().strip("|").split("|")]
+
+
+def extract_table_after_heading(content: str, heading: str) -> list[str]:
+    lines = content.splitlines()
+    try:
+        start = lines.index(heading)
+    except ValueError:
+        fail(f"missing heading: {heading}")
+
+    table: list[str] = []
+    for line in lines[start + 1 :]:
+        if line.startswith("## ") and table:
+            break
+        if line.startswith("|"):
+            table.append(line)
+        elif table and line.strip():
+            break
+
+    if len(table) < 3:
+        fail(f"{heading} table must include a header, separator, and at least one data row")
+    if not TABLE_SEPARATOR_RE.match(table[1]):
+        fail(f"{heading} table separator is malformed")
+    return table
+
+
+def validate_table_shape(table: list[str], expected_header: list[str], heading: str) -> list[list[str]]:
+    header = table_cells(table[0])
+    if header != expected_header:
+        fail(f"{heading} table header must be: {' | '.join(expected_header)}")
+
+    rows = [table_cells(row) for row in table[2:]]
+    for row in rows:
+        if len(row) != len(expected_header):
+            fail(f"{heading} row has {len(row)} cells, expected {len(expected_header)}: {row}")
+        if any(not cell for cell in row):
+            fail(f"{heading} row contains an empty cell: {row}")
+    return rows
+
+
+def validate_featured_projects(content: str) -> None:
+    table = extract_table_after_heading(content, "## Featured projects")
+    rows = validate_table_shape(table, ["Project", "What it is", "Current focus"], "Featured projects")
+
+    if len(rows) < 5:
+        fail("Featured projects table should include at least five active projects")
+
+    project_names: set[str] = set()
+    for project, description, current_focus in rows:
+        link_match = LINK_RE.fullmatch(project)
+        if not link_match:
+            fail(f"featured project must be a markdown link: {project}")
+
+        project_name, project_url = link_match.groups()
+        if project_name in project_names:
+            fail(f"duplicate featured project row: {project_name}")
+        project_names.add(project_name)
+
+        if not project_url.startswith("https://github.com/asimawdah/"):
+            fail(f"featured project must link to an asimawdah repository: {project_url}")
+        if len(description) > 180:
+            fail(f"featured project description is too long: {project_name}")
+        if len(current_focus) > 180:
+            fail(f"featured project current focus is too long: {project_name}")
+
+
+def validate_roadmap(content: str) -> None:
+    table = extract_table_after_heading(content, "## Current roadmap")
+    rows = validate_table_shape(table, ["Now", "Next", "Later"], "Current roadmap")
+
+    if len(rows) < 2:
+        fail("Current roadmap should include at least two concise rows")
+    if len(rows) > 4:
+        fail("Current roadmap should stay concise with no more than four rows")
+
+    for row in rows:
+        for cell in row:
+            if len(cell) > 170:
+                fail(f"roadmap cell is too long: {cell}")
+
+
+def validate_placeholder_content(content: str) -> None:
+    lowered = content.lower()
+    for placeholder in FORBIDDEN_PLACEHOLDERS:
+        if placeholder in lowered:
+            fail(f"placeholder content found: {placeholder}")
 
 
 def main() -> None:
@@ -103,8 +208,9 @@ def main() -> None:
     if "skillicons.dev" in content:
         fail("profile should avoid heavy badge/icon sections and stay concise")
 
-    if "Current roadmap" not in content or "Now | Next | Later" not in content:
-        fail("roadmap table is missing or malformed")
+    validate_featured_projects(content)
+    validate_roadmap(content)
+    validate_placeholder_content(content)
 
     print("README validation passed")
 
