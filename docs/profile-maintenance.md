@@ -40,8 +40,23 @@ The automated validator also protects the table contract:
 - every project cell must be a Markdown link to an `asimawdah/*` repository;
 - every row must have non-empty cells;
 - project names cannot be duplicated;
+- project repository URLs cannot be duplicated under different display names;
+- canonical featured projects must stay present with their expected labels and repository links;
 - descriptions and current-focus cells must stay concise enough for mobile readability;
 - placeholder content such as `TBD`, `TODO`, or `coming soon` is not allowed.
+
+Canonical featured projects currently protected by CI:
+
+| Label | Repository |
+| --- | --- |
+| `MahamKit` | `asimawdah/maham-app` |
+| `maham-api` | `asimawdah/maham-api` |
+| `PyPrivate` | `asimawdah/passgen` |
+| `Vaultlet` | `asimawdah/vaultlet` |
+| `SkillMint` | `asimawdah/SkillMint` |
+| `main_cluster` | `asimawdah/main_cluster` |
+
+Update `REQUIRED_PROJECT_LINKS` in `scripts/validate_profile_readme.py` when the profile intentionally changes its canonical project set.
 
 ## Roadmap rules
 
@@ -58,6 +73,8 @@ The roadmap should include at least two concise rows and no more than four rows.
 The validator has a small Python unittest suite that checks both the current profile README and common failure modes:
 
 - duplicate featured-project names;
+- duplicate featured-project repository URLs;
+- missing canonical featured-project labels;
 - untrusted external links;
 - overlong roadmap cells that hurt mobile readability.
 
