@@ -29,6 +29,7 @@ REQUIRED_SECTIONS = [
 REQUIRED_PROJECT_LINKS = {
     "MahamKit": "https://github.com/asimawdah/maham-app",
     "maham-api": "https://github.com/asimawdah/maham-api",
+    "PyPrivate": "https://github.com/asimawdah/passgen",
     "Vaultlet": "https://github.com/asimawdah/vaultlet",
     "SkillMint": "https://github.com/asimawdah/SkillMint",
     "main_cluster": "https://github.com/asimawdah/main_cluster",
@@ -128,6 +129,7 @@ def validate_featured_projects(content: str) -> None:
         fail("Featured projects table should include at least five active projects")
 
     project_names: set[str] = set()
+    project_urls: set[str] = set()
     for project, description, current_focus in rows:
         link_match = LINK_RE.fullmatch(project)
         if not link_match:
@@ -138,12 +140,24 @@ def validate_featured_projects(content: str) -> None:
             fail(f"duplicate featured project row: {project_name}")
         project_names.add(project_name)
 
+        if project_url in project_urls:
+            fail(f"duplicate featured project URL: {project_url}")
+        project_urls.add(project_url)
+
         if not project_url.startswith("https://github.com/asimawdah/"):
             fail(f"featured project must link to an asimawdah repository: {project_url}")
         if len(description) > 180:
             fail(f"featured project description is too long: {project_name}")
         if len(current_focus) > 180:
             fail(f"featured project current focus is too long: {project_name}")
+
+    missing_projects = sorted(set(REQUIRED_PROJECT_LINKS) - project_names)
+    if missing_projects:
+        fail(f"missing required featured projects: {', '.join(missing_projects)}")
+
+    for required_name, required_url in REQUIRED_PROJECT_LINKS.items():
+        if required_url not in project_urls:
+            fail(f"missing required featured project URL for {required_name}: {required_url}")
 
 
 def validate_roadmap(content: str) -> None:
