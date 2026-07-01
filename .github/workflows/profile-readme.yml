@@ -5,6 +5,7 @@ on:
     paths:
       - README.md
       - scripts/validate_profile_readme.py
+      - tests/test_validate_profile_readme.py
       - .github/workflows/profile-readme.yml
   push:
     branches:
@@ -12,6 +13,7 @@ on:
     paths:
       - README.md
       - scripts/validate_profile_readme.py
+      - tests/test_validate_profile_readme.py
       - .github/workflows/profile-readme.yml
 
 jobs:
@@ -23,3 +25,6 @@ jobs:
 
       - name: Validate profile README
         run: python3 scripts/validate_profile_readme.py
+
+      - name: Run validator regression tests
+        run: python3 -m unittest tests/test_validate_profile_readme.py
