@@ -61,6 +61,28 @@ class ProfileReadmeValidatorTests(unittest.TestCase):
 
         self.assert_validation_fails(mutated)
 
+    def test_rejects_duplicate_featured_project_urls(self) -> None:
+        duplicate_url_row = (
+            "| [MahamKit mobile](https://github.com/asimawdah/maham-app) | "
+            "Duplicate repository row. | Duplicate focus. |"
+        )
+        mutated = self.valid_content.replace(
+            "## Current roadmap",
+            f"{duplicate_url_row}\n\n## Current roadmap",
+            1,
+        )
+
+        self.assert_validation_fails(mutated)
+
+    def test_rejects_missing_required_featured_project(self) -> None:
+        mutated = self.valid_content.replace(
+            "[PyPrivate](https://github.com/asimawdah/passgen)",
+            "[Passgen](https://github.com/asimawdah/passgen)",
+            1,
+        )
+
+        self.assert_validation_fails(mutated)
+
     def test_rejects_untrusted_external_links(self) -> None:
         mutated = self.valid_content.replace(
             "[Python](https://python.org)",
