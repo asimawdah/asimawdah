@@ -16,12 +16,13 @@ Before opening or merging a README change:
 1. Confirm every featured project link points to an existing `asimawdah/*` repository or a trusted official technology site.
 2. Keep project descriptions short and visitor-focused.
 3. Update the `Current roadmap` table when active work changes.
-4. Avoid adding private contact details or credentials.
+4. Avoid adding sensitive or temporary contact details.
 5. Check the profile on a narrow/mobile viewport after editing long table text.
 6. Run:
 
    ```bash
    python3 scripts/validate_profile_readme.py
+   python3 -m unittest tests/test_validate_profile_readme.py
    ```
 
 ## Featured project rules
@@ -52,10 +53,20 @@ Use three columns only:
 
 The roadmap should include at least two concise rows and no more than four rows. This keeps it easy to scan and prevents the profile from becoming a long backlog.
 
+## Regression test coverage
+
+The validator has a small Python unittest suite that checks both the current profile README and common failure modes:
+
+- duplicate featured-project names;
+- untrusted external links;
+- overlong roadmap cells that hurt mobile readability.
+
+When adding new README rules, add a regression test for the failure mode so CI protects the rule instead of relying on manual review only.
+
 ## Link and content safety
 
 - Use HTTPS links only.
 - Prefer GitHub repository links for project references.
 - Avoid badge-heavy sections that slow scanning on mobile.
-- Do not add phone numbers, credentials, private infrastructure details, or temporary contact links.
+- Do not add phone numbers, account secrets, private infrastructure details, or temporary contact links.
 - Keep roadmap language current and practical instead of promising unreleased production status.
