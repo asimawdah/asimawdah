@@ -25,6 +25,22 @@ Before opening or merging a README change:
    python3 -m unittest tests/test_validate_profile_readme.py
    ```
 
+## Profile metadata rules
+
+The short YAML block near the top of `README.md` is protected because it is one of the first things visitors and automated profile readers see.
+
+Required keys:
+
+| Key | Rule |
+| --- | --- |
+| `location` | Keep it general and include `Yemen`; do not add street-level location. |
+| `education` | Keep the degree/school summary concise. |
+| `focus` | Use an inline list with three to seven short active focus areas. |
+| `status` | Keep it concise and avoid temporary claims. |
+| `languages` | Keep exactly `English` and `العربية`. |
+
+Do not add sensitive metadata keys such as `phone`, `email`, `address`, `token`, `secret`, `api_key`, or `password`. Put longer context in the sections below instead of expanding the metadata block.
+
 ## Featured project rules
 
 Each featured project should include:
@@ -76,7 +92,10 @@ The validator has a small Python unittest suite that checks both the current pro
 - duplicate featured-project repository URLs;
 - missing canonical featured-project labels;
 - untrusted external links;
-- overlong roadmap cells that hurt mobile readability.
+- overlong roadmap cells that hurt mobile readability;
+- missing profile metadata keys;
+- unknown or sensitive profile metadata keys;
+- duplicate profile focus items.
 
 When adding new README rules, add a regression test for the failure mode so CI protects the rule instead of relying on manual review only.
 
