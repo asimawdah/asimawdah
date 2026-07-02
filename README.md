@@ -8,6 +8,7 @@ education: B.Sc. in Information Technology — Al-Saeedah University (2020–202
 focus: [Flutter, Python APIs, Docker, Kubernetes, GitHub Actions]
 status: Open to work, collaboration, and product-focused engineering projects
 languages: [English, العربية]
+last_reviewed: 2026-07-02
 ```
 
 ## What I build
