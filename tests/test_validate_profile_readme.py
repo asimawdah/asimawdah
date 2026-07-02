@@ -102,6 +102,33 @@ class ProfileReadmeValidatorTests(unittest.TestCase):
 
         self.assert_validation_fails(mutated)
 
+    def test_rejects_missing_profile_metadata_key(self) -> None:
+        mutated = self.valid_content.replace(
+            "languages: [English, العربية]\n",
+            "",
+            1,
+        )
+
+        self.assert_validation_fails(mutated)
+
+    def test_rejects_unknown_profile_metadata_key(self) -> None:
+        mutated = self.valid_content.replace(
+            "languages: [English, العربية]",
+            "languages: [English, العربية]\nemail: asim@example.com",
+            1,
+        )
+
+        self.assert_validation_fails(mutated)
+
+    def test_rejects_duplicate_profile_focus_items(self) -> None:
+        mutated = self.valid_content.replace(
+            "focus: [Flutter, Python APIs, Docker, Kubernetes, GitHub Actions]",
+            "focus: [Flutter, Python APIs, Docker, Flutter]",
+            1,
+        )
+
+        self.assert_validation_fails(mutated)
+
 
 if __name__ == "__main__":
     unittest.main()
