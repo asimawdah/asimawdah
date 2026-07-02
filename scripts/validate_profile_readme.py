@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +33,7 @@ REQUIRED_PROFILE_METADATA_KEYS = [
     "focus",
     "status",
     "languages",
+    "last_reviewed",
 ]
 
 SENSITIVE_METADATA_KEYS = {
@@ -87,6 +89,7 @@ FORBIDDEN_PLACEHOLDERS = (
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 TABLE_SEPARATOR_RE = re.compile(r"^\|\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$")
 YAML_BLOCK_RE = re.compile(r"```yaml\n(?P<body>.*?)\n```", re.DOTALL)
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 def fail(message: str) -> None:
@@ -152,6 +155,17 @@ def parse_inline_list(value: str, key: str) -> list[str]:
     return items
 
 
+def validate_last_reviewed(value: str) -> None:
+    if not DATE_RE.fullmatch(value):
+        fail("profile metadata `last_reviewed` must use YYYY-MM-DD")
+    try:
+        reviewed_at = date.fromisoformat(value)
+    except ValueError:
+        fail("profile metadata `last_reviewed` must be a valid calendar date")
+    if reviewed_at > date.today():
+        fail("profile metadata `last_reviewed` cannot be in the future")
+
+
 def validate_profile_metadata(content: str) -> None:
     blocks = YAML_BLOCK_RE.findall(content)
     if len(blocks) != 1:
@@ -195,6 +209,8 @@ def validate_profile_metadata(content: str) -> None:
     languages = parse_inline_list(metadata["languages"], "languages")
     if set(languages) != {"English", "العربية"}:
         fail("profile metadata languages must be exactly English and العربية")
+
+    validate_last_reviewed(metadata["last_reviewed"])
 
 
 def validate_featured_projects(content: str) -> None:
