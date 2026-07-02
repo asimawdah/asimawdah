@@ -26,6 +26,25 @@ REQUIRED_SECTIONS = [
     "## Quick links",
 ]
 
+REQUIRED_PROFILE_METADATA_KEYS = [
+    "location",
+    "education",
+    "focus",
+    "status",
+    "languages",
+]
+
+SENSITIVE_METADATA_KEYS = {
+    "address",
+    "api_key",
+    "apikey",
+    "email",
+    "password",
+    "phone",
+    "secret",
+    "token",
+}
+
 REQUIRED_PROJECT_LINKS = {
     "MahamKit": "https://github.com/asimawdah/maham-app",
     "maham-api": "https://github.com/asimawdah/maham-api",
@@ -67,6 +86,7 @@ FORBIDDEN_PLACEHOLDERS = (
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 TABLE_SEPARATOR_RE = re.compile(r"^\|\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$")
+YAML_BLOCK_RE = re.compile(r"```yaml\n(?P<body>.*?)\n```", re.DOTALL)
 
 
 def fail(message: str) -> None:
@@ -119,6 +139,62 @@ def validate_table_shape(table: list[str], expected_header: list[str], heading: 
         if any(not cell for cell in row):
             fail(f"{heading} row contains an empty cell: {row}")
     return rows
+
+
+def parse_inline_list(value: str, key: str) -> list[str]:
+    if not (value.startswith("[") and value.endswith("]")):
+        fail(f"profile metadata `{key}` must use an inline list")
+    items = [item.strip() for item in value[1:-1].split(",")]
+    if not items or any(not item for item in items):
+        fail(f"profile metadata `{key}` contains an empty list item")
+    if len(items) != len(set(items)):
+        fail(f"profile metadata `{key}` contains duplicate items")
+    return items
+
+
+def validate_profile_metadata(content: str) -> None:
+    blocks = YAML_BLOCK_RE.findall(content)
+    if len(blocks) != 1:
+        fail("profile README must contain exactly one yaml metadata block")
+
+    metadata: dict[str, str] = {}
+    for line in blocks[0].splitlines():
+        if not line.strip():
+            continue
+        if ":" not in line:
+            fail(f"profile metadata line must use `key: value`: {line}")
+        key, value = [part.strip() for part in line.split(":", 1)]
+        if not key or not value:
+            fail(f"profile metadata line must include a non-empty key and value: {line}")
+        if key in metadata:
+            fail(f"duplicate profile metadata key: {key}")
+        if key in SENSITIVE_METADATA_KEYS:
+            fail(f"sensitive profile metadata key is not allowed: {key}")
+        metadata[key] = value
+
+    expected_keys = set(REQUIRED_PROFILE_METADATA_KEYS)
+    actual_keys = set(metadata)
+    missing = sorted(expected_keys - actual_keys)
+    if missing:
+        fail(f"missing profile metadata keys: {', '.join(missing)}")
+    unknown = sorted(actual_keys - expected_keys)
+    if unknown:
+        fail(f"unexpected profile metadata keys: {', '.join(unknown)}")
+
+    if "Yemen" not in metadata["location"]:
+        fail("profile metadata location should stay general and include Yemen")
+    if len(metadata["status"]) > 110:
+        fail("profile metadata status should stay concise")
+
+    focus = parse_inline_list(metadata["focus"], "focus")
+    if not 3 <= len(focus) <= 7:
+        fail("profile metadata focus should include three to seven concise items")
+    if any(len(item) > 24 for item in focus):
+        fail("profile metadata focus items should stay concise")
+
+    languages = parse_inline_list(metadata["languages"], "languages")
+    if set(languages) != {"English", "العربية"}:
+        fail("profile metadata languages must be exactly English and العربية")
 
 
 def validate_featured_projects(content: str) -> None:
@@ -222,6 +298,7 @@ def main() -> None:
     if "skillicons.dev" in content:
         fail("profile should avoid heavy badge/icon sections and stay concise")
 
+    validate_profile_metadata(content)
     validate_featured_projects(content)
     validate_roadmap(content)
     validate_placeholder_content(content)
