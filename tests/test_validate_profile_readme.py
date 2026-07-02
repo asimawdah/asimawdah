@@ -102,28 +102,24 @@ class ProfileReadmeValidatorTests(unittest.TestCase):
 
         self.assert_validation_fails(mutated)
 
-    def test_rejects_missing_profile_metadata_key(self) -> None:
+    def test_rejects_missing_last_reviewed_metadata(self) -> None:
+        mutated = self.valid_content.replace("last_reviewed: 2026-07-02\n", "", 1)
+
+        self.assert_validation_fails(mutated)
+
+    def test_rejects_invalid_last_reviewed_format(self) -> None:
         mutated = self.valid_content.replace(
-            "languages: [English, العربية]\n",
-            "",
+            "last_reviewed: 2026-07-02",
+            "last_reviewed: July 2026",
             1,
         )
 
         self.assert_validation_fails(mutated)
 
-    def test_rejects_unknown_profile_metadata_key(self) -> None:
+    def test_rejects_future_last_reviewed_date(self) -> None:
         mutated = self.valid_content.replace(
-            "languages: [English, العربية]",
-            "languages: [English, العربية]\nemail: asim@example.com",
-            1,
-        )
-
-        self.assert_validation_fails(mutated)
-
-    def test_rejects_duplicate_profile_focus_items(self) -> None:
-        mutated = self.valid_content.replace(
-            "focus: [Flutter, Python APIs, Docker, Kubernetes, GitHub Actions]",
-            "focus: [Flutter, Python APIs, Docker, Flutter]",
+            "last_reviewed: 2026-07-02",
+            "last_reviewed: 2999-01-01",
             1,
         )
 
